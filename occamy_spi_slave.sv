@@ -7,12 +7,12 @@
 module occamy_spi_slave
 #(
     parameter type                  axi_lite_req_t = logic,
-    parameter type                  axi_lite_resp_t = logic
+    parameter type                  axi_lite_rsp_t = logic
 ) (
     input   logic                   clk_i,
     input   logic                   rst_ni,
     output  axi_lite_req_t          axi_lite_req_o,
-    input   axi_lite_resp_t         axi_lite_resp_i,
+    input   axi_lite_rsp_t          axi_lite_rsp_i,
 
     input   logic                   spi_sclk_i,
     input   logic                   spi_cs_i,
@@ -20,8 +20,8 @@ module occamy_spi_slave
     input   logic  [3:0]            spi_sdi_i,
     output  logic  [3:0]            spi_sdo_o
 );
-    localparam int AXI_ADDR_WIDTH  = $bits(axi_lite_req_t.aw.addr);
-    localparam int AXI_DATA_WIDTH  = $bits(axi_lite_resp_t.r.data);
+    localparam int AXI_ADDR_WIDTH  = $bits(axi_lite_req_o.aw.addr);
+    localparam int AXI_DATA_WIDTH  = $bits(axi_lite_rsp_i.r.data);
 
     axi_spi_slave #(
         .AXI_ADDR_WIDTH     (AXI_ADDR_WIDTH),
