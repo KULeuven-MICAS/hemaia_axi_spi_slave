@@ -20,8 +20,8 @@ module occamy_spi_slave
     input   logic  [3:0]            spi_sdi_i,
     output  logic  [3:0]            spi_sdo_o
 );
-    localparam int AXI_ADDR_WIDTH  = $bits(axi_lite_req_t.aw);
-    localparam int AXI_DATA_WIDTH  = $bits(axi_lite_resp_t.r);
+    localparam int AXI_ADDR_WIDTH  = $bits(axi_lite_req_t.aw.addr);
+    localparam int AXI_DATA_WIDTH  = $bits(axi_lite_resp_t.r.data);
 
     axi_spi_slave #(
         .AXI_ADDR_WIDTH     (AXI_ADDR_WIDTH),
@@ -48,7 +48,7 @@ module occamy_spi_slave
     .axi_aresetn(rst_ni),
     // WRITE ADDRESS CHANNEL
     .axi_master_aw_valid(axi_lite_req_o.aw_valid),
-    .axi_master_aw_addr(axi_lite_req_o.aw),
+    .axi_master_aw_addr(axi_lite_req_o.aw.addr),
     .axi_master_aw_prot(),
     .axi_master_aw_region(),
     .axi_master_aw_len(),
