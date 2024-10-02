@@ -16,7 +16,6 @@ module occamy_spi_slave
 
     input   logic                   spi_sclk_i,
     input   logic                   spi_cs_i,
-    output  logic  [1:0]            spi_mode_o,
     output  logic  [3:0]            spi_oen_o,
     input   logic  [3:0]            spi_sdi_i,
     output  logic  [3:0]            spi_sdo_o
@@ -34,7 +33,6 @@ module occamy_spi_slave
     .test_mode(1'b0),
     .spi_sclk(spi_sclk_i),
     .spi_cs(spi_cs_i),
-    .spi_mode(spi_mode_o),
     .spi_sdi0(spi_sdi_i[0]),
     .spi_sdi1(spi_sdi_i[1]),
     .spi_sdi2(spi_sdi_i[2]),
@@ -43,10 +41,10 @@ module occamy_spi_slave
     .spi_sdo1(spi_sdo_o[1]),
     .spi_sdo2(spi_sdo_o[2]),
     .spi_sdo3(spi_sdo_o[3]),
-    .spi_oen0(spi_oen_o[0]),
-    .spi_oen1(spi_oen_o[1]),
-    .spi_oen2(spi_oen_o[2]),
-    .spi_oen3(spi_oen_o[3]),
+    .spi_oen0_o(spi_oen_o[0]),
+    .spi_oen1_o(spi_oen_o[1]),
+    .spi_oen2_o(spi_oen_o[2]),
+    .spi_oen3_o(spi_oen_o[3]),
 
     // AXI4 MASTER
     .axi_aclk(clk_i),
@@ -99,7 +97,7 @@ module occamy_spi_slave
     .axi_master_r_ready(axi_lite_req_o.r_ready),
 
     // WRITE RESPONSE CHANNEL
-    .axi_master_b_valid(axi_lite_rsp_i.b.valid),
+    .axi_master_b_valid(axi_lite_rsp_i.b_valid),
     .axi_master_b_resp(axi_lite_rsp_i.b.resp),
     .axi_master_b_id('0),
     .axi_master_b_user('0),
