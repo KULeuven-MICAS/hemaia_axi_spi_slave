@@ -51,7 +51,7 @@ module occamy_spi_slave #(
       // WRITE ADDRESS CHANNEL
       .axi_master_aw_valid(axi_lite_req_o.aw_valid),
       .axi_master_aw_addr(axi_lite_req_o.aw.addr),
-      .axi_master_aw_prot(),
+      .axi_master_aw_prot(axi_lite_req_o.aw.prot),
       .axi_master_aw_region(),
       .axi_master_aw_len(),
       .axi_master_aw_size(),  // Only 32bit aw / ar is supported. Be careful
