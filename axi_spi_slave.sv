@@ -105,7 +105,7 @@ module axi_spi_slave
 
     logic        ctrl_rd_wr;
 
-    logic [31:0] ctrl_addr;
+    logic [AXI_ADDR_WIDTH-1:0] ctrl_addr;
     logic        ctrl_addr_valid;
 
     logic [31:0] ctrl_data_rx;
