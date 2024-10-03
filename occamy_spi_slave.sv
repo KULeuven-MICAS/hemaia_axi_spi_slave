@@ -90,15 +90,15 @@ module occamy_spi_slave #(
       .axi_master_r_valid(axi_lite_rsp_i.r_valid),
       .axi_master_r_data(axi_lite_rsp_i.r.data),
       .axi_master_r_resp(axi_lite_rsp_i.r.resp),
-      .axi_master_r_last('0),
-      .axi_master_r_id('0),
+      .axi_master_r_last('1),
+      .axi_master_r_id(1),
       .axi_master_r_user('0),
       .axi_master_r_ready(axi_lite_req_o.r_ready),
 
       // WRITE RESPONSE CHANNEL
       .axi_master_b_valid(axi_lite_rsp_i.b_valid),
       .axi_master_b_resp(axi_lite_rsp_i.b.resp),
-      .axi_master_b_id('0),
+      .axi_master_b_id(1),
       .axi_master_b_user('0),
       .axi_master_b_ready(axi_lite_req_o.b_ready)
   );
