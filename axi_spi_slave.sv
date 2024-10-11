@@ -183,7 +183,7 @@ module axi_spi_slave #(
       .tx_data_valid     (tx_data_valid),
       .tx_done           (tx_done),
       .ctrl_rd_wr        (ctrl_rd_wr),
-      .ctrl_addr         (ctrl_addr),
+      .ctrl_addr         (ctrl_addr[31:0]),
       .ctrl_addr_valid   (ctrl_addr_valid),
       .ctrl_data_rx      (ctrl_data_rx),
       .ctrl_data_rx_valid(ctrl_data_rx_valid),
@@ -193,6 +193,12 @@ module axi_spi_slave #(
       .ctrl_data_tx_ready(ctrl_data_tx_ready),
       .wrap_length       (wrap_length)
   );
+
+  generate
+    if (AXI_ADDR_WIDTH > 32) begin : gen_axi_addr_width_msb_assign
+      assign ctrl_addr[AXI_ADDR_WIDTH-1:32] = '0;
+    end
+  endgenerate
 
   spi_slave_dc_fifo #(
       .DATA_WIDTH  (32),
