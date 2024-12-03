@@ -10,6 +10,7 @@ module occamy_spi_slave #(
 ) (
     input  logic          clk_i,
     input  logic          rst_ni,
+    input  logic [7:0]    chip_id_i,
     output axi_lite_req_t axi_lite_req_o,
     input  axi_lite_rsp_t axi_lite_rsp_i,
 
@@ -44,6 +45,9 @@ module occamy_spi_slave #(
       .spi_oen1_o(spi_oen_o[1]),
       .spi_oen2_o(spi_oen_o[2]),
       .spi_oen3_o(spi_oen_o[3]),
+
+      // Chip ID
+      .chip_id(chip_id_i),
 
       // AXI4 MASTER
       .axi_aclk(clk_i),

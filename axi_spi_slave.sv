@@ -15,6 +15,8 @@ module axi_spi_slave #(
     parameter AXI_ID_WIDTH   = 3,
     parameter DUMMY_CYCLES   = 32
 ) (
+    // SPI Interface
+    //***************************************
     input  logic test_mode,
     input  logic spi_sclk,
     input  logic spi_cs,
@@ -30,6 +32,10 @@ module axi_spi_slave #(
     output logic spi_sdo1,
     output logic spi_sdo2,
     output logic spi_sdo3,
+
+    // Chip ID for Multichip Environment
+    //***************************************
+    input logic [                7:0] chip_id,
 
     // AXI4 MASTER
     //***************************************
@@ -196,7 +202,11 @@ module axi_spi_slave #(
 
   generate
     if (AXI_ADDR_WIDTH > 32) begin : gen_axi_addr_width_msb_assign
-      assign ctrl_addr[AXI_ADDR_WIDTH-1:32] = '0;
+      // First Part: MSB is assigned with chip_id
+      assign ctrl_addr[AXI_ADDR_WIDTH-1:AXI_ADDR_WIDTH-8] = chip_id;
+      // Second Part: until 32th bits are zero
+      assign ctrl_addr[AXI_ADDR_WIDTH-8-1:32] = '0;
+      // Third Part: the 32 LSB bits are assigned by the controller (actual address)
     end
   endgenerate
 
