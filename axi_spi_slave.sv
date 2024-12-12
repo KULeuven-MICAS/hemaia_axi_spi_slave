@@ -241,37 +241,6 @@ module axi_spi_slave #(
         .dst_valid_o(ctrl_data_tx_valid),
         .dst_ready_i(ctrl_data_tx_ready)
     );
-//   spi_slave_dc_fifo #(
-//       .DATA_WIDTH  (32),
-//       .BUFFER_DEPTH(8)
-//   ) u_dcfifo_rx (
-//       .clk_a  (spi_sclk),
-//       .rstn_a (axi_aresetn),
-//       .data_a (ctrl_data_rx),
-//       .valid_a(ctrl_data_rx_valid),
-//       .ready_a(ctrl_data_rx_ready),
-//       .clk_b  (axi_aclk),
-//       .rstn_b (axi_aresetn),
-//       .data_b (fifo_data_rx),
-//       .valid_b(fifo_data_rx_valid),
-//       .ready_b(fifo_data_rx_ready)
-//   );
-
-//   spi_slave_dc_fifo #(
-//       .DATA_WIDTH  (32),
-//       .BUFFER_DEPTH(8)
-//   ) u_dcfifo_tx (
-//       .clk_a  (axi_aclk),
-//       .rstn_a (axi_aresetn),
-//       .data_a (fifo_data_tx),
-//       .valid_a(fifo_data_tx_valid),
-//       .ready_a(fifo_data_tx_ready),
-//       .clk_b  (spi_sclk),
-//       .rstn_b (axi_aresetn),
-//       .data_b (ctrl_data_tx),
-//       .valid_b(ctrl_data_tx_valid),
-//       .ready_b(ctrl_data_tx_ready)
-//   );
 
   spi_slave_axi_plug #(
       .AXI_ADDR_WIDTH(AXI_ADDR_WIDTH),
