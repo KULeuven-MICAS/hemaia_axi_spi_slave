@@ -210,37 +210,37 @@ module axi_spi_slave #(
     end
   endgenerate
 
-  spi_slave_dc_fifo #(
-      .DATA_WIDTH  (32),
-      .BUFFER_DEPTH(8)
-  ) u_dcfifo_rx (
-      .clk_a  (spi_sclk),
-      .rstn_a (axi_aresetn),
-      .data_a (ctrl_data_rx),
-      .valid_a(ctrl_data_rx_valid),
-      .ready_a(ctrl_data_rx_ready),
-      .clk_b  (axi_aclk),
-      .rstn_b (axi_aresetn),
-      .data_b (fifo_data_rx),
-      .valid_b(fifo_data_rx_valid),
-      .ready_b(fifo_data_rx_ready)
-  );
+    cdc_fifo_gray #(
+        .WIDTH(32),
+        .LOG_DEPTH(5)
+    ) i_cdc_fifo_rx (
+        .src_rst_ni(axi_aresetn),
+        .src_clk_i(spi_sclk),
+        .src_data_i(ctrl_data_rx),
+        .src_valid_i(ctrl_data_rx_valid),
+        .src_ready_o(ctrl_data_rx_ready),
+        .dst_rst_ni(axi_aresetn),
+        .dst_clk_i(axi_aclk),
+        .dst_data_o(fifo_data_rx),
+        .dst_valid_o(fifo_data_rx_valid),
+        .dst_ready_i(fifo_data_rx_ready)
+    );
 
-  spi_slave_dc_fifo #(
-      .DATA_WIDTH  (32),
-      .BUFFER_DEPTH(8)
-  ) u_dcfifo_tx (
-      .clk_a  (axi_aclk),
-      .rstn_a (axi_aresetn),
-      .data_a (fifo_data_tx),
-      .valid_a(fifo_data_tx_valid),
-      .ready_a(fifo_data_tx_ready),
-      .clk_b  (spi_sclk),
-      .rstn_b (axi_aresetn),
-      .data_b (ctrl_data_tx),
-      .valid_b(ctrl_data_tx_valid),
-      .ready_b(ctrl_data_tx_ready)
-  );
+    cdc_fifo_gray #(
+        .WIDTH(32),
+        .LOG_DEPTH(5)
+    ) i_cdc_fifo_tx (
+        .src_rst_ni(axi_aresetn),
+        .src_clk_i(axi_aclk),
+        .src_data_i(fifo_data_tx),
+        .src_valid_i(fifo_data_tx_valid),
+        .src_ready_o(fifo_data_tx_ready),
+        .dst_rst_ni(axi_aresetn),
+        .dst_clk_i(spi_sclk),
+        .dst_data_o(ctrl_data_tx),
+        .dst_valid_o(ctrl_data_tx_valid),
+        .dst_ready_i(ctrl_data_tx_ready)
+    );
 
   spi_slave_axi_plug #(
       .AXI_ADDR_WIDTH(AXI_ADDR_WIDTH),
