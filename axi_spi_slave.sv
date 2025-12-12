@@ -12,8 +12,8 @@ module axi_spi_slave #(
     parameter AXI_ADDR_WIDTH = 32,
     parameter AXI_DATA_WIDTH = 64,
     parameter AXI_USER_WIDTH = 6,
-    parameter AXI_ID_WIDTH   = 3,
-    parameter DUMMY_CYCLES   = 32,
+    parameter AXI_ID_WIDTH = 3,
+    parameter DUMMY_CYCLES = 32,
     parameter FREQ_SEL_DEFAULT
 ) (
     // SPI Interface
@@ -36,7 +36,7 @@ module axi_spi_slave #(
 
     // Chip ID for Multichip Environment
     //***************************************
-    input logic [                7:0] chip_id,
+    input logic [7:0] chip_id,
 
     // AXI4 MASTER
     //***************************************
@@ -94,9 +94,9 @@ module axi_spi_slave #(
     input  logic [               1:0] axi_master_b_resp,
     input  logic [  AXI_ID_WIDTH-1:0] axi_master_b_id,
     input  logic [AXI_USER_WIDTH-1:0] axi_master_b_user,
-    output logic                      axi_master_b_ready
+    output logic                      axi_master_b_ready,
 
-    output logic [               7:0] freq_sel_o,
+    output logic [7:0] freq_sel_o
 );
 
   logic                      en_quad;
@@ -202,7 +202,7 @@ module axi_spi_slave #(
       .ctrl_data_tx_valid(ctrl_data_tx_valid),
       .ctrl_data_tx_ready(ctrl_data_tx_ready),
       .wrap_length       (wrap_length),
-      .freq_sel_o          (freq_sel_o)
+      .freq_sel_o        (freq_sel_o)
   );
 
   generate

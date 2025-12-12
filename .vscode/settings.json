@@ -1,5 +1,14 @@
 {
     "files.watcherExclude": {
         "**/target": true
-    }
+    },
+    // Use Verible formatter extension for Verilog/SystemVerilog
+    "[verilog]": {
+        "editor.defaultFormatter": "bmpenuelas.systemverilog-formatter-vscode"
+    },
+    "[systemverilog]": {
+        "editor.defaultFormatter": "bmpenuelas.systemverilog-formatter-vscode"
+    },
+    // Enable format on save
+    "editor.formatOnSave": true
 }
