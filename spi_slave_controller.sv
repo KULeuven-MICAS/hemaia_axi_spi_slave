@@ -15,7 +15,8 @@
 
 module spi_slave_controller
     #(
-    parameter DUMMY_CYCLES = 32
+    parameter DUMMY_CYCLES = 32,
+    parameter FREQ_SEL_DEFAULT 
     )
     (input logic        sclk,
     input  logic        sys_rstn,
@@ -40,7 +41,9 @@ module spi_slave_controller
     input  logic [31:0] ctrl_data_tx,
     input  logic        ctrl_data_tx_valid,
     output logic        ctrl_data_tx_ready,
-    output logic [15:0] wrap_length
+    output logic [15:0] wrap_length,
+    // Always available, from reg4 
+    output logic [7:0] freq_sel_o
     );
 
   localparam REG_SIZE = 8;
@@ -70,7 +73,7 @@ module spi_slave_controller
   logic        enable_cont;
   logic        enable_regs;
   logic        cmd_error;
-  logic  [1:0] reg_sel;
+  logic  [2:0] reg_sel;
   logic  [REG_SIZE-1:0] reg_data;
   logic        reg_valid;
 
@@ -99,7 +102,8 @@ module spi_slave_controller
   );
 
   spi_slave_regs #(
-      .REG_SIZE(REG_SIZE)
+      .REG_SIZE(REG_SIZE),
+      .REG4_DEFAULT(FREQ_SEL_DEFAULT)
     ) u_spiregs(
       .sclk(sclk),
       .rstn(sys_rstn),
@@ -110,7 +114,8 @@ module spi_slave_controller
       .rd_addr(reg_sel),
       .dummy_cycles(s_dummy_cycles),
       .en_qpi(en_quad),
-      .wrap_length(wrap_length)
+      .wrap_length(wrap_length),
+      .reg4_o(freq_sel_o)
       );
   always_comb
   begin
