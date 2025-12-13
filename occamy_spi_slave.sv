@@ -108,7 +108,9 @@ module occamy_spi_slave #(
       .axi_master_b_resp(axi_lite_rsp_i.b.resp),
       .axi_master_b_id(1'd1),
       .axi_master_b_user('0),
-      .axi_master_b_ready(axi_lite_req_o.b_ready)
+      .axi_master_b_ready(axi_lite_req_o.b_ready),
+
+      .freq_sel_o(freq_sel_o)
   );
 
 endmodule
