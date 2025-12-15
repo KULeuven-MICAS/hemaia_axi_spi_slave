@@ -51,6 +51,8 @@ module spi_slave_regs #(
         rd_data = reg3;
       3'b100:
         rd_data = reg4;
+      default:
+        rd_data = 'h0;
     endcase
   end
 
